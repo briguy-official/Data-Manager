@@ -2,7 +2,7 @@
 Record keeping and data visualization for HCRC Kart setups.
 
 # Must have the following packages/modules 
-matplotlib
-glob
-json
+matplotlib,
+glob,
+json,
 tkinter
