@@ -13,6 +13,8 @@ from tkinter import ttk
 
 import matplotlib
 matplotlib.use("TkAgg")
+from matplotlib import pyplot
+pyplot.xkcd()
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure
 
@@ -138,13 +140,18 @@ class DataEntry(tk.Frame):
         label = ttk.Label(self, text='Data Entry Wizard', font=LARGE_FONT)
         label.grid(row=0)
         
+        instructions = ttk.Label(self, text=' Please enter whole number \nor decimal values', 
+                        font=SMALL_FONT, justify=tk.CENTER)
+        instructions.grid(row=0, column=1)
+        
         self.string_vars = {}
         self.ent_list =[]
         
         # add labeled entry fields for data
         r = 2
         for Field in ('Day', 'Month', 'Year', 'Run Number', 'Front PSI', 'Rear PSI', 
-                      'Clutch RPM', 'Carb Temp', 'Track Temp', 'Driver'):
+                      'Clutch RPM', 'SS Carb Turns', 'HS Carb Turns', 'Carb Temp', 
+                      'Track Temp', 'Driver'):
             label = ttk.Label(self, text=Field, font=SMALL_FONT).grid(row=r, column=0)
             self.string_vars[Field] = tk.StringVar()
 
@@ -182,6 +189,9 @@ class GraphsPage(tk.Frame):
         f = Figure(figsize=(5,5), dpi=100)
         a = f.add_subplot(111)
         
+        # Bring up a popup window with graph settings. 
+        # TODO: Design popup window with extensive ability to choose information
+        # being viewedw
         settings_button = ttk.Button(self, text='Graph Settings', 
                                     command=lambda: graph_settings(a))
         
