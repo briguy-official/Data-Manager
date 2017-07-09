@@ -39,7 +39,7 @@ def save_setup(entries, entry_list):
         if len(inStr) == 0:
             popUpMsg('Please Fill Out All Fields')
             return
-        
+
         # add field entry to data{}
         try:
             data[key] = int(inStr)
@@ -193,7 +193,7 @@ class GraphsPage(tk.Frame):
         # TODO: Design popup window with extensive ability to choose information
         # being viewedw
         settings_button = ttk.Button(self, text='Graph Settings', 
-                                    command=lambda: graph_settings(a))
+                                    command=lambda: popUpMsg('Not Supported Yet'))
         
         canvas = FigureCanvasTkAgg(f, self)
         canvas.show()

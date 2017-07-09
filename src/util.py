@@ -30,9 +30,10 @@ def graph_settings(figure):
     B1 = ttk.Button(popup, text='Okay', command=popup.destroy)
     B1.pack()
     
-    return ('hist', 'times')
-    
     popup.mainloop()
+    
+        
+    return ('hist', 'times')
 
 # returns a dictionary of 'run_id':('json_File_Name', 'Label Text')    
 def json_dict():
