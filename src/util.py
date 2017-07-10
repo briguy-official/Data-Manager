@@ -19,6 +19,15 @@ LARGE_FONT = ('Verdana', 12)
 NORM_FONT = ('Helvetica', 10)
 SMALL_FONT = ('Helvetica', 8)
 
+def popUpMsg(msg):
+    popup = tk.Tk()
+    tk.Tk.wm_title(popup, '!')
+    label = ttk.Label(popup, text=msg, font=NORM_FONT)
+    label.pack(side='top', fill='x', pady=10)
+    B1 = ttk.Button(popup, text='Okay', command=popup.destroy)
+    B1.pack()
+    popup.mainloop()
+
 # Function in progress, not really sure how to pass parameters for graph settings
 def graph_settings(figure):
     popup = tk.Tk()
@@ -64,10 +73,10 @@ def json_dict():
     
 def run_id_to_label(id):
     
-    year = id[0:3]
-    month = num2month(int(id[4:5]))
-    day = id[6:7]
-    run_num = id[8:9]
+    year = id[0:4]
+    month = num2month(int(id[4:6]))
+    day = id[6:8]
+    run_num = id[8:10]
     
     return '%s %s, %s, Run #%s' %(month, day, year, run_num)
     

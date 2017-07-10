@@ -5,7 +5,7 @@
 # 
 # Brian Acosta
 # July 5 2017
-from util import LARGE_FONT, SMALL_FONT, NORM_FONT, graph_settings, json_dict
+from util import *
 import glob
 import json
 import tkinter as tk
@@ -18,14 +18,6 @@ pyplot.xkcd()
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure
 
-def popUpMsg(msg):
-    popup = tk.Tk()
-    tk.Tk.wm_title(popup, '!')
-    label = ttk.Label(popup, text=msg, font=NORM_FONT)
-    label.pack(side='top', fill='x', pady=10)
-    B1 = ttk.Button(popup, text='Okay', command=popup.destroy)
-    B1.pack()
-    popup.mainloop()
 
 def save_setup(entries, entry_list):
     
@@ -95,7 +87,7 @@ class GrandPrixDataManager(tk.Tk):
         # Create a dictionary to hold all of the frames in the program
         self.frames = {}
         
-        for F in (StartPage, DataEntry, GraphsPage):
+        for F in (StartPage, DataEntry, GraphsPage, RunViewPage):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky ='nsew')
@@ -125,6 +117,11 @@ class StartPage(tk.Frame):
         graphs_button = ttk.Button(self, text='View Graphs',
                             command=lambda: controller.show_frame(GraphsPage))
         graphs_button.pack()
+        
+        runview_button = ttk.Button(self, text='Find Runs',
+                            command=lambda: controller.show_frame(RunViewPage))
+        runview_button.pack()
+        
         
         quit_button = ttk.Button(self, text='Quit', command=lambda: quit())
         quit_button.pack()
@@ -206,6 +203,29 @@ class GraphsPage(tk.Frame):
         settings_button.pack()
         home_button.pack()
 
+########################################
+### Run Listing Page
+########################################  
+class RunViewPage(tk.Frame):
+    
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text='Run Viewing Page', font=LARGE_FONT)
+        label.pack()
+        
+        labels = []
+        
+        jlist = json_dict()
+        
+        for key in jlist:
+            run_label = ttk.Label(self, text=jlist[key][1], font=NORM_FONT)
+            run_label.pack()
+            labels.append(run_label)
+
+        home_button = ttk.Button(self, text='Home', 
+                            command=lambda: controller.show_frame(StartPage))
+                            
+        home_button.pack()
 ################################################################################   
 app = GrandPrixDataManager()
 app.mainloop()
